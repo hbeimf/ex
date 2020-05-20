@@ -5,7 +5,8 @@ extern crate chrono;
 
 use chrono::{DateTime, Utc};
 
-use rustler::{Env, Term, NifResult, Encoder};
+use rustler::{Binary, Env, Term, NifResult, Encoder};
+// use rustler::{Binary, Encoder, Env, NifResult, OwnedBinary, Term};
 
 mod atoms {
     rustler_atoms! {
@@ -18,8 +19,27 @@ mod atoms {
 
 rustler_export_nifs! {
     "ers",
-    [("add", 2, add),("current_time", 0, current_time)],
+    [
+        ("add", 2, add),
+        ("current_time", 0, current_time),
+        ("hello", 1, hello),
+    ],
     None
+}
+
+fn hello<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
+    // let resource: ResourceArc<FilterResource> = args[0].decode()?;
+    let _person: Binary = if args[0].is_binary() {
+        args[0].decode()?
+    } else {
+        Binary::from_owned(args[0].to_binary(), env)
+    };
+
+    // println!("{:b}", person);
+    // let mut filter = resource.filter.write().unwrap();
+    // (*filter).set(&key);
+
+    Ok(atoms::ok().encode(env))
 }
 
 fn add<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
