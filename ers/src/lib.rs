@@ -63,6 +63,12 @@ struct WrappingRecord<'a> {
     b: i64
 }
 
+#[derive(Debug, NifMap)]
+pub struct AMap {
+    a: i32,
+    b: i32
+}
+
 rustler_export_nifs! {
     "ers",
     [
@@ -76,9 +82,17 @@ rustler_export_nifs! {
         ("echo_record", 1, echo_record),
         ("echo_wrapping_record", 1, echo_wrapping_record),
         ("echo_term", 1, echo_term),
+        ("echo_map", 1, echo_map),
     ],
     None
 }
+
+fn echo_map<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
+    let r: AMap = args[0].decode()?;
+
+    Ok(r.encode(env))
+}
+
 
 fn echo_record<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
     let r: ARecord = args[0].decode()?;
