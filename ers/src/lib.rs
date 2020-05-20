@@ -26,6 +26,13 @@ struct AStruct<'a> {
     d: Term<'a>
 }
 
+#[derive(Debug, NifStruct)]
+#[module="WrappingStruct"]
+struct WrappingStruct<'a> {
+    a: AStruct<'a>,
+    b: i64,
+}
+
 #[derive(Debug, NifTuple)]
 struct ATuple<'a> {
     a: i64,
@@ -40,6 +47,22 @@ struct WrappingTuple<'a> {
     b: i64
 }
 
+#[derive(Debug, NifRecord)]
+#[tag = "arecord"]
+struct ARecord<'a> {
+    a: i64,
+    b: f64,
+    c: String,
+    d: Term<'a>
+}
+
+#[derive(Debug, NifRecord)]
+#[tag = "wrappingrecord"]
+struct WrappingRecord<'a> {
+    a: ARecord<'a>,
+    b: i64
+}
+
 rustler_export_nifs! {
     "ers",
     [
@@ -47,10 +70,30 @@ rustler_export_nifs! {
         ("current_time", 0, current_time),
         ("hello", 1, hello),
         ("echo_struct", 1, echo_struct),
+        ("echo_wrapping_struct", 1, echo_wrapping_struct),
         ("echo_tuple", 1, echo_tuple),
         ("echo_wrapping_tuple", 1, echo_wrapping_tuple),
+        ("echo_record", 1, echo_record),
+        ("echo_wrapping_record", 1, echo_wrapping_record),
+        ("echo_term", 1, echo_term),
     ],
     None
+}
+
+fn echo_record<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
+    let r: ARecord = args[0].decode()?;
+
+    Ok(r.encode(env))
+}
+
+fn echo_wrapping_record<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
+    let r: WrappingRecord = args[0].decode()?;
+
+    Ok(r.encode(env))
+}
+
+fn echo_term<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
+    Ok(args[0].encode(env))
 }
 
 fn echo_wrapping_tuple<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
@@ -68,6 +111,12 @@ fn echo_tuple<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
 //https://github.com/evnu/rusty/blob/master/native/rusty/src/lib.rs
 fn echo_struct<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
     let s: AStruct = args[0].decode()?;
+
+    Ok(s.encode(env))
+}
+
+fn echo_wrapping_struct<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
+    let s: WrappingStruct = args[0].decode()?;
 
     Ok(s.encode(env))
 }
