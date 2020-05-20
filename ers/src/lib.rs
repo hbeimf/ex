@@ -17,14 +17,59 @@ mod atoms {
     }
 }
 
+#[derive(Debug, NifStruct)]
+#[module="astruct"]
+struct AStruct<'a> {
+    a: i64,
+    b: f64,
+    c: String,
+    d: Term<'a>
+}
+
+#[derive(Debug, NifTuple)]
+struct ATuple<'a> {
+    a: i64,
+    b: f64,
+    c: String,
+    d: Term<'a>
+}
+
+#[derive(Debug, NifTuple)]
+struct WrappingTuple<'a> {
+    a: ATuple<'a>,
+    b: i64
+}
+
 rustler_export_nifs! {
     "ers",
     [
         ("add", 2, add),
         ("current_time", 0, current_time),
         ("hello", 1, hello),
+        ("echo_struct", 1, echo_struct),
+        ("echo_tuple", 1, echo_tuple),
+        ("echo_wrapping_tuple", 1, echo_wrapping_tuple),
     ],
     None
+}
+
+fn echo_wrapping_tuple<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
+    let r: WrappingTuple = args[0].decode()?;
+
+    Ok(r.encode(env))
+}
+
+fn echo_tuple<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
+    let r: ATuple = args[0].decode()?;
+
+    Ok(r.encode(env))
+}
+
+//https://github.com/evnu/rusty/blob/master/native/rusty/src/lib.rs
+fn echo_struct<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
+    let s: AStruct = args[0].decode()?;
+
+    Ok(s.encode(env))
 }
 
 fn hello<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
