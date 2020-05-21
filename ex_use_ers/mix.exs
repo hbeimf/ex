@@ -16,7 +16,8 @@ defmodule ExUseErs.MixProject do
   # Run "mix help deps" for examples and options.
   defp deps do
     [
-      {:distillery, "~> 1.5.2", runtime: false}
+      {:distillery, "~> 1.5.2", runtime: false},
+      {:rustler, "~> 0.21.0"}
     ]
   end
 end
