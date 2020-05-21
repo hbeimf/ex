@@ -1,7 +1,7 @@
 #[macro_use] extern crate rustler;
 // #[macro_use] extern crate lazy_static;
 
-extern crate chrono;
+//extern crate chrono;
 
 use chrono::{DateTime, Utc};
 
