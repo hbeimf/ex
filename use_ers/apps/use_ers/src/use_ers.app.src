@@ -1,0 +1,17 @@
+{application, use_ers,
+ [{description, "An OTP application"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {mod, { use_ers_app, []}},
+  {applications,
+   [kernel,
+    stdlib
+    , ers
+   ]},
+  {env,[]},
+  {modules, []},
+
+  {maintainers, []},
+  {licenses, []},
+  {links, []}
+ ]}.
