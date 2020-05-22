@@ -22,7 +22,9 @@
 	 echo_record/1,
 	 echo_wrapping_record/1,
 	 echo_term/1,
-	 echo_map/1
+	 echo_map/1,
+	 sum_list/1,
+	 make_list/0
 	]).
 
 -on_load(init/0).
@@ -95,8 +97,11 @@ add(_,_) ->
 current_time() ->
     not_loaded(?LINE).
 
+sum_list(_) ->
+    not_loaded(?LINE).
 
-
+make_list() ->
+    not_loaded(?LINE).
 %%====================================================================
 %%%% Internal functions
 %%%%%====================================================================
