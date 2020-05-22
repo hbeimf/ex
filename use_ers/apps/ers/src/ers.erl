@@ -23,6 +23,7 @@
 	 echo_wrapping_record/1,
 	 echo_term/1,
 	 echo_map/1,
+	 map_list/1,
 	 sum_list/1,
 	 make_list/0
 	]).
@@ -54,6 +55,9 @@
 %%====================================================================
 % ers:echo_map(#{a => 1, b => 3}).
 echo_map(_) ->
+	not_loaded(?LINE).
+
+map_list(_) -> 
 	not_loaded(?LINE).
 
 % ers:echo_record({{10, 1.0, <<"hello">>, self()}, 20}).

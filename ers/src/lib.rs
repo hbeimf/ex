@@ -30,6 +30,7 @@ rustler_export_nifs! {
         ("echo_wrapping_record", 1, record::echo_wrapping_record),
         ("echo_term", 1, term::echo_term),
         ("echo_map", 1, map::echo_map),
+        ("map_list", 1, map::map_list),
         ("sum_list", 1, list::sum_list),
         ("make_list", 0, list::make_list),
 

@@ -38,6 +38,9 @@ test(Id) ->
 	?LOG(#{index => Id, r1 =>R1, r2 =>R2, r3=>R3, r4=>R4, r5=>R5, r6=>R6}),
 	ok.
 
+map_list() ->
+	ers:map_list([#{a => 1, b => 3}, #{a => 1, b => 8}]).
+
 
 % tt:echo_record().
 echo_record() ->
