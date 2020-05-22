@@ -51,9 +51,16 @@ pub fn current_time<'a>(env: Env<'a>, _args: &[Term<'a>]) -> NifResult<Term<'a>>
 
 
 fn call_dynamic_add(a:i32, b:i32) -> Result<i32, Box<dyn std::error::Error>> {
-    let lib = lib::Library::new("/web/ex/c_so/libadd.so")?;
+//    let lib = lib::Library::new("/web/ex/c_so/libadd.so")?;
+//    unsafe {
+//        let func: lib::Symbol<unsafe extern fn(i32, i32) -> i32> = lib.get(b"add")?;
+//        Ok(func(a, b))
+//    }
+
+    let lib = lib::Library::new("/web/ex/go_so/libadd.so")?;
     unsafe {
-        let func: lib::Symbol<unsafe extern fn(i32, i32) -> i32> = lib.get(b"add")?;
+        let func: lib::Symbol<unsafe extern fn(i32, i32) -> i32> = lib.get(b"Add")?;
         Ok(func(a, b))
     }
 }
+
