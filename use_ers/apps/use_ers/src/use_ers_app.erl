@@ -15,6 +15,8 @@
 %%====================================================================
 
 start(_StartType, _StartArgs) ->
+	application:set_env(kernel, inet_dist_listen_min, 9100),
+ 	application:set_env(kernel, inet_dist_listen_max, 9105),
     use_ers_sup:start_link().
 
 %%--------------------------------------------------------------------
