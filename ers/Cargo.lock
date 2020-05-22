@@ -51,6 +51,7 @@ version = "0.1.0"
 dependencies = [
  "chrono",
  "lazy_static",
+ "libloading",
  "rustler",
  "rustler_codegen",
 ]
@@ -90,6 +91,15 @@ name = "libc"
 version = "0.2.70"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3baa92041a6fec78c687fa0cc2b3fae8884f743d672cf551bed1d6dac6988d0f"
+
+[[package]]
+name = "libloading"
+version = "0.6.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2cadb8e769f070c45df05c78c7520eb4cd17061d4ab262e43cfc68b4d00ac71c"
+dependencies = [
+ "winapi",
+]
 
 [[package]]
 name = "num-integer"

@@ -1,15 +1,9 @@
 use chrono::{DateTime, Utc};
 
 use rustler::{Binary, Env, Term, NifResult, Encoder};
+use lib;
 
-mod atoms {
-    rustler_atoms! {
-        atom ok;
-        //atom error;
-        //atom __true__ = "true";
-        //atom __false__ = "false";
-    }
-}
+use crate::atoms;
 
 pub fn hello<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
     // let resource: ResourceArc<FilterResource> = args[0].decode()?;
@@ -27,10 +21,22 @@ pub fn hello<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
 }
 
 pub fn add<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
-    let num1: i64 = args[0].decode()?;
-    let num2: i64 = args[1].decode()?;
+    let num1: i32 = args[0].decode()?;
+    let num2: i32 = args[1].decode()?;
 
-    Ok((atoms::ok(), num1 + num2).encode(env))
+    let res = call_dynamic_add(num1, num2);
+    match res {
+        Ok(result) => {
+            Ok((atoms::ok(), result).encode(env))
+
+        },
+        Err(err) => {
+            Ok((atoms::error(), err.to_string()).encode(env))
+        },
+
+    }
+
+//    Ok((atoms::ok(), num1 + num2).encode(env))
 }
 
 pub fn current_time<'a>(env: Env<'a>, _args: &[Term<'a>]) -> NifResult<Term<'a>> {
@@ -39,5 +45,15 @@ pub fn current_time<'a>(env: Env<'a>, _args: &[Term<'a>]) -> NifResult<Term<'a>>
     let timestamp: i64 = now.timestamp();
     let nanosec: u32 = now.timestamp_subsec_nanos();
 
+
     Ok((timestamp*1000000000 + nanosec as i64).encode(env))
+}
+
+
+fn call_dynamic_add(a:i32, b:i32) -> Result<i32, Box<dyn std::error::Error>> {
+    let lib = lib::Library::new("/web/ex/c_so/libadd.so")?;
+    unsafe {
+        let func: lib::Symbol<unsafe extern fn(i32, i32) -> i32> = lib.get(b"add")?;
+        Ok(func(a, b))
+    }
 }

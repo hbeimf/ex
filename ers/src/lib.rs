@@ -8,6 +8,8 @@
 use rustler::{Term};
 // use rustler::{Binary, Encoder, Env, NifResult, OwnedBinary, Term};
 
+extern crate libloading as lib;
+
 mod tuple;
 mod map;
 mod record;
@@ -15,6 +17,7 @@ mod term;
 mod ex_struct;
 mod fun;
 mod list;
+mod atoms;
 
 rustler_export_nifs! {
     "ers",
