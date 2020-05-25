@@ -1,3 +1,9 @@
+GOPATH := $(shell pwd)
+
+all:
+	@GOPATH=$(GOPATH) go get -d
+	@GOPATH=$(GOPATH) go build -x -v -ldflags "-s -w" -buildmode=c-shared -o libadd.so   main.go
+
 lib:
 	go build -x -v -ldflags "-s -w" -buildmode=c-shared -o libadd.so   main.go
 

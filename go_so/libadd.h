@@ -71,6 +71,10 @@ extern "C" {
 
 extern GoInt32 Add(GoInt32 p0, GoInt32 p1);
 
+extern GoString Encode(GoString p0, GoString p1);
+
+extern GoString Decode(GoString p0, GoString p1);
+
 #ifdef __cplusplus
 }
 #endif
