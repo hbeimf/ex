@@ -12,7 +12,9 @@ defmodule Ers.Application do
       # Starts a worker by calling: Ers.Worker.start_link(arg)
       # {Ers.Worker, arg}
       worker(Ers.UseGenServer, []),
-      worker(Ers.WorkActor, [])
+#      worker(Ers.WorkActor, []),
+      supervisor(Ers.UseSupervisor.Supervisor, [[name: Ers.UseSupervisor.Supervisor]]),
+      supervisor(Ers.UseSimpleSup.Supervisor, [[name: Ers.UseSimpleSup.Supervisor]])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
