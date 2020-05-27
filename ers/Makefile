@@ -10,3 +10,5 @@ push:
 	git push
 
 
+clean:
+	rm -rf ./target

@@ -28,13 +28,26 @@
 	 make_list/0
 	]).
 
+-export([
+	str_replace/1,
+	test/1
+
+	]).
+
 -on_load(init/0).
 
 -define(APPNAME, ?MODULE).
 -define(LIBNAME, "libers").
 
 
+% ers:str_replace({<<"hello world">>, <<"world">>, <<"you">>}).
+% {ok, S} = ers:str_replace({<<"hello world">>, <<"world">>, unicode:characters_to_binary("你好")}).
+% io:format("~ts~n", [S]).
+str_replace(_) ->
+	not_loaded(?LINE).
 
+test(_) ->
+	not_loaded(?LINE).
 %%====================================================================
 %% API functions - NIFS
 %%====================================================================

@@ -18,6 +18,7 @@ mod ex_struct;
 mod fun;
 mod list;
 mod atoms;
+mod api_string;
 
 rustler_export_nifs! {
     "ers",
@@ -36,6 +37,8 @@ rustler_export_nifs! {
         ("map_list", 1, map::map_list),
         ("sum_list", 1, list::sum_list),
         ("make_list", 0, list::make_list),
+        ("test", 1, api_string::test),
+        ("str_replace", 1, api_string::str_replace),
 
     ],
     None
