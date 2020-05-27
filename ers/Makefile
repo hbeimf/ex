@@ -1,5 +1,5 @@
 all:
-	cargo build
+	cargo build --release
 
 rel:
 	cargo build --release
