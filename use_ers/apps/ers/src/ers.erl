@@ -25,7 +25,9 @@
 	 echo_map/1,
 	 map_list/1,
 	 sum_list/1,
-	 make_list/0
+	 make_list/0,
+	 clang_add/2,
+	 clang_str_replace/1
 	]).
 
 -export([
@@ -39,7 +41,15 @@
 -define(APPNAME, ?MODULE).
 -define(LIBNAME, "libers").
 
+% ers:clang_str_replace({<<"hello world">>, <<"world">>, <<"you">>}).
+% {ok, S} = ers:clang_str_replace({<<"hello world">>, <<"world">>, unicode:characters_to_binary("你好")}).
+% io:format("~ts~n", [S]).
 
+clang_str_replace(_) -> 
+	not_loaded(?LINE).
+% ers:clang_add(1,2).
+clang_add(_,_) ->
+    not_loaded(?LINE).
 % ers:str_replace({<<"hello world">>, <<"world">>, <<"you">>}).
 % {ok, S} = ers:str_replace({<<"hello world">>, <<"world">>, unicode:characters_to_binary("你好")}).
 % io:format("~ts~n", [S]).

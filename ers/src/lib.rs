@@ -19,6 +19,7 @@ mod fun;
 mod list;
 mod atoms;
 mod api_string;
+mod api_clang_dll;
 
 rustler_export_nifs! {
     "ers",
@@ -39,7 +40,8 @@ rustler_export_nifs! {
         ("make_list", 0, list::make_list),
         ("test", 1, api_string::test),
         ("str_replace", 1, api_string::str_replace),
-
+        ("clang_add", 2, api_clang_dll::add),
+        ("clang_str_replace", 1, api_clang_dll::clang_str_replace),
     ],
     None
 }
