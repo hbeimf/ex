@@ -1,6 +1,6 @@
 
 all:
-	# export RUSTLER_NIF_VERSION=2.10
+	export RUSTLER_NIF_VERSION=2.10
 	cargo build --release
 
 rel:
