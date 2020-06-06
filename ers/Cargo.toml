@@ -17,3 +17,5 @@ lazy_static = "1.2.0"
 chrono = "0.4"
 rustler_codegen = "0.21.0"
 libloading = "0.6.2"
+
+rpds = "0.7.0"

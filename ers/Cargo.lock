@@ -10,6 +10,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "archery"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d308d8fa3f687f7a7588fccc4812ed6914be09518232f00454693a7417273ad2"
+dependencies = [
+ "static_assertions",
+]
+
+[[package]]
 name = "autocfg"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -52,6 +61,7 @@ dependencies = [
  "chrono",
  "lazy_static",
  "libloading",
+ "rpds",
  "rustler",
  "rustler_codegen",
 ]
@@ -145,6 +155,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "rpds"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1196a0a2f52d343bd32179834273eaac7d8739f7e3f8b700227d2fa06b9a423b"
+dependencies = [
+ "archery",
+]
+
+[[package]]
 name = "rustc-demangle"
 version = "0.1.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -182,6 +201,12 @@ checksum = "3e2c6dd78a5cffd4294c4aca568522736b8a67f0e8ccdb6a55354dc933726bc4"
 dependencies = [
  "unreachable",
 ]
+
+[[package]]
+name = "static_assertions"
+version = "0.3.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7f3eb36b47e512f8f1c9e3d10c2c1965bc992bd9cdb024fa581e2194501c83d3"
 
 [[package]]
 name = "syn"

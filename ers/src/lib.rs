@@ -10,6 +10,7 @@ use rustler::{Term};
 
 extern crate libloading as lib;
 
+
 mod tuple;
 mod map;
 mod record;
@@ -20,6 +21,8 @@ mod list;
 mod atoms;
 mod api_string;
 mod api_clang_dll;
+
+pub mod chapter1;
 
 rustler_export_nifs! {
     "ers",
