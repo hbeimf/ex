@@ -2,7 +2,7 @@
 name = "ers"
 version = "0.1.0"
 authors = ["maomao <you@example.com>"]
-edition = "2018"
+edition = "2015"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -12,10 +12,12 @@ path = "src/lib.rs"
 crate-type = ["dylib"]
 
 [dependencies]
-rustler = "0.21.0"
+rustler = "0.5.0"
+#erlang_nif-sys = "<=0.5.4"
+
 lazy_static = "1.2.0"
 chrono = "0.4"
-rustler_codegen = "0.21.0"
+## rustler_codegen = "0.21.0"
 libloading = "0.6.2"
 
 rpds = "0.7.0"
