@@ -18,3 +18,7 @@ push:
 
 clean:
 	rm -rf ./target
+
+
+erl:
+	erl

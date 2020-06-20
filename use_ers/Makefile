@@ -15,3 +15,10 @@ push:
 	git add .
 	git commit -m 'pu'
 	git push
+
+
+rel: 
+	./rebar3 compile
+	./rebar3 release
+	./rebar3 tar
+	cp ./_build/default/rel/use_ers/use_ers-0.1.0.tar.gz ./run/
