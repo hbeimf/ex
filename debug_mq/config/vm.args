@@ -1,0 +1,6 @@
+-sname debug_mq
+
+-setcookie debug_mq_cookie
+
++K true
++A30
