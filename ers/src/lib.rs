@@ -21,6 +21,8 @@ mod list;
 mod atoms;
 mod api_string;
 mod api_clang_dll;
+mod api_golang_dll;
+
 
 pub mod chapter1;
 
@@ -45,6 +47,8 @@ rustler_export_nifs! {
         ("str_replace", 1, api_string::str_replace),
         ("clang_add", 2, api_clang_dll::add),
         ("clang_str_replace", 1, api_clang_dll::clang_str_replace),
+        ("golang_add", 2, api_golang_dll::add),
+        ("golang_str_replace", 1, api_golang_dll::golang_str_replace),
     ],
     None
 }

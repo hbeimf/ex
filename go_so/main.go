@@ -4,11 +4,27 @@ import "C"
 
 import "github.com/mervick/aes-everywhere/go/aes256"
 
-
+import "strings"
+// import "fmt"
 
 func main() {}
  
 
+//export StrReplace
+func StrReplace(from *C.char, old *C.char, new_str *C.char) *C.char  {
+	str_from := C.GoString(from)
+	str_old := C.GoString(old)
+	str_new_str := C.GoString(new_str)
+
+	// fmt.Println(str_from)
+	// fmt.Println(str_old)
+	// fmt.Println(str_new_str)
+
+	result := strings.Replace(str_from, str_old, str_new_str, -1)
+
+	// result := "reply"
+	return C.CString(result)
+}
 
 //export Add
 func Add(a int32, b int32) int32 {
