@@ -143,3 +143,39 @@ pub fn golang_str_replace<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term
 
 
 
+pub fn echo<'a>(env: Env<'a>, _args: &[Term<'a>]) -> NifResult<Term<'a>> {
+	let a_str = "abcdefg" ;
+	let _res = call_echo(a_str);
+	Ok((atoms::ok()).encode(env))
+}
+
+fn call_echo(from_str:&str) -> Result<GoString, Box<dyn std::error::Error>> {
+    let lib = lib::Library::new("/web/ex/go_so/libadd.so")?;
+    unsafe {
+        let params = c_string(from_str);
+
+        let func: lib::Symbol<unsafe extern fn(s1:GoString) -> GoString> = lib.get(b"Echo")?;
+        Ok(func(params))
+    }
+
+}
+
+//调用clang时传字符串
+//https://doc.rust-lang.org/std/ffi/struct.CString.html#examples-3
+// https://blog.arranfrance.com/post/cgo-sqip-rust/
+
+#[repr(C)]
+struct GoString {
+    a: *const c_char,
+    b: i64,
+}
+
+fn c_string(s: &str) -> GoString {
+	let cstr_from_str = CString::new(s).expect("CString::new failed");
+	let ptr = cstr_from_str.as_ptr();
+	let go_string = GoString {
+		a: ptr,
+		b: cstr_from_str.as_bytes().len() as i64,
+	};
+	go_string
+}

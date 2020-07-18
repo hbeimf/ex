@@ -49,6 +49,7 @@ rustler_export_nifs! {
         ("clang_str_replace", 1, api_clang_dll::clang_str_replace),
         ("golang_add", 2, api_golang_dll::add),
         ("golang_str_replace", 1, api_golang_dll::golang_str_replace),
+        ("golang_echo", 0, api_golang_dll::echo),
     ],
     None
 }

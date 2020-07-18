@@ -29,7 +29,8 @@
 	 clang_add/2,
 	 clang_str_replace/1,
 	 golang_add/2,
-	 golang_str_replace/1
+	 golang_str_replace/1,
+	 golang_echo/0
 	]).
 
 -export([
@@ -43,7 +44,9 @@
 -define(APPNAME, ?MODULE).
 -define(LIBNAME, "libers").
 
-
+% ers:golang_echo().
+golang_echo() -> 
+	not_loaded(?LINE).
 % ers:golang_str_replace({<<"hello world">>, <<"world">>, <<"you">>}).
 golang_str_replace(_) -> 
 	not_loaded(?LINE).

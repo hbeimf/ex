@@ -5,10 +5,17 @@ import "C"
 import "github.com/mervick/aes-everywhere/go/aes256"
 
 import "strings"
-// import "fmt"
+import "fmt"
 
 func main() {}
  
+func Echo(from string)  string {
+	// result := strings.Replace(str_from, str_old, str_new_str, -1)
+	// result := "reply"
+	fmt.Println("hello world!")
+	fmt.Println(from)
+	return from
+}
 
 //export StrReplace
 func StrReplace(from *C.char, old *C.char, new_str *C.char) *C.char  {
