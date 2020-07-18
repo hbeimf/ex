@@ -1,0 +1,6 @@
+-sname debug_sub
+
+-setcookie debug_sub_cookie
+
++K true
++A30

@@ -1,16 +1,18 @@
-{application, debug_mq,
+{application, glib,
  [{description, "An OTP application"},
-  {vsn, "0.1.0"},
+  {vsn, "0.6.1"},
   {registered, []},
-  {mod, {debug_mq_app, []}},
+  {mod, { glib_app, []}},
   {applications,
    [kernel,
-    stdlib
-    ,pub
+    stdlib,
+    inets,
+    esnowflake
    ]},
   {env,[]},
   {modules, []},
 
-  {licenses, ["Apache 2.0"]},
+  {maintainers, []},
+  {licenses, []},
   {links, []}
  ]}.

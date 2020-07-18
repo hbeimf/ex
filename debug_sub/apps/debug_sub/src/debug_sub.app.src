@@ -1,12 +1,12 @@
-{application, debug_mq,
+{application, debug_sub,
  [{description, "An OTP application"},
   {vsn, "0.1.0"},
   {registered, []},
-  {mod, {debug_mq_app, []}},
+  {mod, {debug_sub_app, []}},
   {applications,
    [kernel,
     stdlib
-    ,pub
+    , sub
    ]},
   {env,[]},
   {modules, []},

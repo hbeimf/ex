@@ -1,9 +1,9 @@
 %%%-------------------------------------------------------------------
-%% @doc pub top level supervisor.
+%% @doc sub top level supervisor.
 %% @end
 %%%-------------------------------------------------------------------
 
--module(pub_sup).
+-module(sub_sup).
 
 -behaviour(supervisor).
 
@@ -32,18 +32,14 @@ init([]) ->
     % ChildSpecs = [],
     % {ok, {SupFlags, ChildSpecs}}.
 
-%% internal functions
-    Children = [
-    	child(pub_actor)
+Children = [
+    	% child(rabbit_log_send)
     	% , child(rabbit_error_log_send)
-     %    , child(rabbit_pub_account_log)
-     %    , child(rabbit_pub_game_log)
-     %    , child(pub_cache)
-     %    , child(rabbit_pub_channel_credits_log)
-     %    , child(rabbit_pub_modify_account_interface)
+      child(sub_actor)
+
     ],
 
-    {ok, { {one_for_one, 10, 10}, Children} }.
+    {ok, { {one_for_all, 10, 10}, Children} }.
 
 
 %%====================================================================

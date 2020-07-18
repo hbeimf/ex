@@ -1,9 +1,9 @@
 %%%-------------------------------------------------------------------
-%% @doc pub top level supervisor.
+%% @doc debug_sub top level supervisor.
 %% @end
 %%%-------------------------------------------------------------------
 
--module(pub_sup).
+-module(debug_sub_sup).
 
 -behaviour(supervisor).
 
@@ -26,30 +26,10 @@ start_link() ->
 %%                  type => worker(),       % optional
 %%                  modules => modules()}   % optional
 init([]) ->
-    % SupFlags = #{strategy => one_for_all,
-    %              intensity => 0,
-    %              period => 1},
-    % ChildSpecs = [],
-    % {ok, {SupFlags, ChildSpecs}}.
+    SupFlags = #{strategy => one_for_all,
+                 intensity => 0,
+                 period => 1},
+    ChildSpecs = [],
+    {ok, {SupFlags, ChildSpecs}}.
 
 %% internal functions
-    Children = [
-    	child(pub_actor)
-    	% , child(rabbit_error_log_send)
-     %    , child(rabbit_pub_account_log)
-     %    , child(rabbit_pub_game_log)
-     %    , child(pub_cache)
-     %    , child(rabbit_pub_channel_credits_log)
-     %    , child(rabbit_pub_modify_account_interface)
-    ],
-
-    {ok, { {one_for_one, 10, 10}, Children} }.
-
-
-%%====================================================================
-%% Internal functions
-%%====================================================================
-child(Mod) ->
-	Child = {Mod, {Mod, start_link, []},
-               permanent, 5000, worker, [Mod]},
-               Child.
