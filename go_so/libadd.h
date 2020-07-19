@@ -69,6 +69,8 @@ extern "C" {
 #endif
 
 
+extern char* Echo(GoString p0);
+
 extern char* StrReplace(char* p0, char* p1, char* p2);
 
 extern GoInt32 Add(GoInt32 p0, GoInt32 p1);

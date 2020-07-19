@@ -1,0 +1,6 @@
+-sname erl_use_obj
+
+-setcookie erl_use_obj_cookie
+
++K true
++A30

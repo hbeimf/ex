@@ -12,6 +12,12 @@ use std::os::raw::c_char;
 use std::ffi::CStr;
 
 
+extern "C" {
+    // fn MakeSVG(path: GoString) -> *const c_char;
+    fn Echo(from: GoString) -> *const c_char;
+}
+
+
 pub fn add<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
     let num1: i32 = args[0].decode()?;
     let num2: i32 = args[1].decode()?;
@@ -145,26 +151,44 @@ pub fn golang_str_replace<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term
 
 pub fn echo<'a>(env: Env<'a>, _args: &[Term<'a>]) -> NifResult<Term<'a>> {
 	let a_str = "abcdefg" ;
-	let _res = call_echo(a_str);
+	// let _res = call_echo(a_str);
+	let params = c_string(a_str);
+	let result = unsafe { Echo(params) };
+	println!("{:?}", result);
+
+	let c_str = unsafe { CStr::from_ptr(result) };
+    	let string = c_str.to_str().expect("Error translating SQIP from library");
+
+// 	let new_str = unsafe {
+//                 let c_str: &CStr = CStr::from_ptr(result);
+//                 let str_slice: &str = c_str.to_str().unwrap();
+//                 let str_buf: String = str_slice.to_owned();
+// //                println!("res1: {:?}", str_buf);
+//                 str_buf
+//             };
+
+            println!("{:?}", string);
+
 	Ok((atoms::ok()).encode(env))
 }
 
-fn call_echo(from_str:&str) -> Result<GoString, Box<dyn std::error::Error>> {
-    let lib = lib::Library::new("/web/ex/go_so/libadd.so")?;
-    unsafe {
-        let params = c_string(from_str);
+// fn call_echo(from_str:&str) -> Result<GoString, Box<dyn std::error::Error>> {
+//     let lib = lib::Library::new("/web/ex/go_so/libadd.so")?;
+//     unsafe {
+//         let params = c_string(from_str);
 
-        let func: lib::Symbol<unsafe extern fn(s1:GoString) -> GoString> = lib.get(b"Echo")?;
-        Ok(func(params))
-    }
+//         let func: lib::Symbol<unsafe extern fn(s1:GoString) -> GoString> = lib.get(b"Echo")?;
+//         Ok(func(params))
+//     }
 
-}
+// }
 
 //调用clang时传字符串
 //https://doc.rust-lang.org/std/ffi/struct.CString.html#examples-3
 // https://blog.arranfrance.com/post/cgo-sqip-rust/
 
 #[repr(C)]
+#[derive(Debug)]
 struct GoString {
     a: *const c_char,
     b: i64,

@@ -9,12 +9,13 @@ import "fmt"
 
 func main() {}
  
-func Echo(from string)  string {
+ //export Echo
+func Echo(from string)  *C.char {
 	// result := strings.Replace(str_from, str_old, str_new_str, -1)
 	// result := "reply"
 	fmt.Println("hello world!")
 	fmt.Println(from)
-	return from
+	return C.CString("hell")
 }
 
 //export StrReplace
